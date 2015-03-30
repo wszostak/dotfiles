@@ -16,7 +16,7 @@ $ cd .dotfiles
 
 ### Install
 
-**IMPORTANT:** This will *override* all existing files with a symlinks configured in `files`.
+**IMPORTANT:** This will *override* all existing files with a symlinks configured in `links`.
 
 ```bash
 $ ./install

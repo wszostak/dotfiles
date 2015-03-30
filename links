@@ -3,6 +3,7 @@
 # dest, src (relative to dotfile dir)
 # bash
 ~/.bash_profile, /bash/.bash_profile
+~/.bashrc, /bash/.bashrc
 
 # Vim
 ~/.vimrc, /vim/.vimrc
