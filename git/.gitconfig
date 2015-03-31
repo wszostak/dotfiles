@@ -65,3 +65,6 @@
 [branch]
     autosetuprebase = always
 [i18n]
+[user]
+    name = Wojciech Szóstak
+    email = wojciech.szostak@allegro.pl
