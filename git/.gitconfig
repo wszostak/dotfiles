@@ -1,67 +1,67 @@
 [core]
     excludesfile = ~/.gitignore_global
 
-	precomposeunicode = true
+    precomposeunicode = true
 
-	# Make `git rebase` safer on OS X
-	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-	trustctime = false
+    # Make `git rebase` safer on OS X
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
 [alias]
-	mylog = log --committer=szostak --no-merges --all-match --reverse --pretty='%h %cd %Cblue%s%Creset'
-	lol = !git --no-pager log --oneline --graph -25
-	br = branch -vv
-	st = status
-	hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %Cblue%s%Creset%d [%Cgreen%an%Creset]\" --graph --date=short
-	amend = commit --amend -C HEAD
-	cl = clean -df
-	r = reset -- .
-	authors = "!f() { git shortlog -nse $1 | cut -f2; }; f"
-	di = diff --ignore-all-space
-	dt = difftool
-	mr = merge --ff-only FETCH_HEAD
-	rr = rebase FETCH_HEAD
+    mylog = log --committer=szostak --no-merges --all-match --reverse --pretty='%h %cd %Cblue%s%Creset'
+    lol = !git --no-pager log --oneline --graph -25
+    br = branch -vv
+    st = status
+    hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %Cblue%s%Creset%d [%Cgreen%an%Creset]\" --graph --date=short
+    amend = commit --amend -C HEAD
+    cl = clean -df
+    r = reset -- .
+    authors = "!f() { git shortlog -nse $1 | cut -f2; }; f"
+    di = diff --ignore-all-space
+    dt = difftool
+    mr = merge --ff-only FETCH_HEAD
+    rr = rebase FETCH_HEAD
     config-update = "!sh -c 'git clean -xdf -- config/ && git merge -X theirs --squash --no-commit origin/ws/config && git reset -- . && git checkout -- .gitignore'"
     remote-make-obsolete = "!f() { git push $1 refs/remotes/$1/$2:refs/heads/obsolete/$2 && git push $1 :$2; }; f"
     clear-branches = "!clear_branches() { git branch --merged $1 | awk '{if ($1 != \"*\") print $1}' | xargs git branch -d; }; clear_branches"
 
 [help]
-	autocorrect = 1
+    autocorrect = 1
 
 [color]
-	ui = auto
+    ui = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red
-	new = green
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
 [color "status"]
-	added = green
-	changed = yellow
-	untracked = red
+    added = green
+    changed = yellow
+    untracked = red
 
 [diff]
-	renames = copies
+    renames = copies
 [diff "pdf"]
-	textconv = "pdftohtml -stdout -noframes"
+    textconv = "pdftohtml -stdout -noframes"
 [diff "image"]
-	command = image
+    command = image
 
 [difftool "image"]
-	cmd = imagediff.sh $MERGED $LOCAL
+    cmd = imagediff.sh $MERGED $LOCAL
 
 [merge]
-	tool = kdiff3
+    tool = kdiff3
 [mergetool]
-	keepBackup = false
-	prompt = false
+    keepBackup = false
+    prompt = false
 [push]
-	default = current
+    default = current
 [rerere]
-	enabled = true
+    enabled = true
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [i18n]
