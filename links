@@ -9,3 +9,9 @@
 # Vim
 ~/.vimrc, /vim/.vimrc
 ~/.vim, /vim/.vim
+
+# Git
+~/.gitconfig, /git/.gitconfig
+~/.gitignore_global, /git/.gitignore_global
+~/.gitk, /git/.gitk
+
