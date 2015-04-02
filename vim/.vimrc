@@ -34,7 +34,6 @@ set spl=pl           " polski słownik
 set tabstop=4
 set expandtab
 set shiftwidth=4
-set binary
 set noeol
 
 " Search options
@@ -47,7 +46,7 @@ set fileencodings=ucs-bom,utf-8,latin2,cp1250
 set encoding=utf-8 nobomb
 set fileencoding=""
 
-set nu!
+set number
 
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
