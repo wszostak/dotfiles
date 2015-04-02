@@ -18,5 +18,5 @@ alias ....='cd ../../../'
 alias gis='git status '
 alias gic='git checkout -- '
 
-alias show="defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder"
-alias hide="defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder"
+alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"
