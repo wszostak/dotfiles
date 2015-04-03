@@ -1,6 +1,8 @@
 #! /bin/bash
 
 alias ls="ls -G"
+alias l='ls'
+alias ll='ls -la'
 alias path='echo $PATH | tr ":" "\n" | sort'
 alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias cls='clr'
@@ -15,9 +17,13 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
+alias dotfiles='sublime ~/.dotfiles'
+alias hosts='sudo sublime /etc/hosts'
+
 # Git
 alias gis='git status '
 alias gic='git checkout -- '
+alias inmaster='git fetch -q && git branch -r --merged origin/master'
 
 alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"
