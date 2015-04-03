@@ -49,12 +49,10 @@ fi;
 # PS1='${debian_chroot:+($debian_chroot)}'
 PS1="\[\033]0;\w\007\]";
 PS1+='\[${userStyle}\]\u';          # user
-PS1+='\[${white}\]@';               # at
+PS1+='\[${white}\] na ';            # at
 PS1+='\[$hostStyle\]\h';            # host
-# PS1+='\[\033[00m\]';
-PS1+=':';                           # in
+PS1+='\[${white}\] w ';             # in
 PS1+='\[\033[01;34m\]\w';           # directory
-# PS1+='\[\033[00m\]';
 PS1+='\[\033[31m\]$(__git_ps1)';    # git status
 PS1+='\n';                          # \n
 PS1+='\[${white}\]\$ \[${reset}\]'; # $
