@@ -9,6 +9,7 @@ alias cls='clr'
 alias scala="JAVA_HOME=`/usr/libexec/java_home -v 1.7` $(brew --prefix scala210)/bin/scala"
 alias genclient="JAVA_HOME=`/usr/libexec/java_home -v 1.7` ./bin/runscala.sh"
 alias sublime='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
+alias googlecc='java -jar /usr/local/lib/node_modules/google-closure-compiler/compiler.jar'
 alias st='sublime'
 alias p='cd ~/projekty'
 alias pnms='cd ~/projekty/NMS/nms'
@@ -25,5 +26,6 @@ alias gis='git status '
 alias gic='git checkout -- '
 alias inmaster='git fetch -q && git branch -r --merged origin/master'
 
+# Mac
 alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"

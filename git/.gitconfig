@@ -23,7 +23,7 @@
     config-update = "!sh -c 'git clean -xdf -- config/ && git merge -X theirs --squash --no-commit origin/ws/config && git reset -- . && git checkout -- .gitignore'"
     remote-make-obsolete = "!f() { git push $1 refs/remotes/$1/$2:refs/heads/obsolete/$2 && git push $1 :$2; }; f"
     clear-branches = "!clear_branches() { git branch --merged $1 | awk '{if ($1 != \"*\") print $1}' | xargs git branch -d; }; clear_branches"
-
+    clang = checkout -- lang/
 [help]
     autocorrect = 1
 
