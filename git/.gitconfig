@@ -6,9 +6,11 @@
     # Make `git rebase` safer on OS X
     # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
     trustctime = false
+	ignorecase = false
 [alias]
     mylog = log --committer=szostak --no-merges --all-match --reverse --pretty='%h %cd %Cblue%s%Creset'
     lol = !git --no-pager log --oneline --graph -25
+    lastver = !git tag --sort v:refname | tail -n3
     br = branch -vv
     st = status
     hist = log --pretty=format:\"%Cgreen%h%Creset %ad | %Cblue%s%Creset%d [%Cgreen%an%Creset]\" --graph --date=short
@@ -68,3 +70,7 @@
 [user]
     name =
     email =
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
