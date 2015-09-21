@@ -48,9 +48,11 @@
 [diff]
     renames = copies
 [diff "pdf"]
-    textconv = "pdftohtml -stdout -noframes"
+    textconv = "pdftohtml -stdout -noframes "
 [diff "image"]
     command = image
+[diff "bin"]
+    textconv = hexdump -v -C
 
 [difftool "image"]
     cmd = imagediff.sh $MERGED $LOCAL

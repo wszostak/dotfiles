@@ -30,16 +30,19 @@ brew link --force scala210
 brew install bash-completion
 
 brew install git
-
 brew install imagemagick
 brew install antiword
 brew install kdiff3
 brew install mysql
+brew install sqlite
 brew install node
 brew install python
-brew install pdftohtml
+brew install poppler
 brew install pwgen
 brew install tesseract
 brew install wget
+brew install zookeeper
+brew install zlib
+brew install pngcheck
 
 brew cleanup
