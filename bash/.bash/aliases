@@ -8,7 +8,7 @@ alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory 
 alias cls='clr'
 alias scala="JAVA_HOME=`/usr/libexec/java_home -v 1.7` $(brew --prefix scala210)/bin/scala"
 alias genclient="JAVA_HOME=`/usr/libexec/java_home -v 1.7` ./bin/runscala.sh"
-alias sublime='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
+alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias googlecc='java -jar /usr/local/lib/node_modules/google-closure-compiler/compiler.jar'
 alias st='sublime'
 alias p='cd ~/projekty'
