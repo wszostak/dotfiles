@@ -70,8 +70,8 @@
     autosetuprebase = always
 [i18n]
 [user]
-    name = Wojciech Szóstak
-    email = wojciech.szostak@allegro.pl
+	name = Wojciech Szostak
+	email = wojciech.szostak@allegrogroup.com
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
