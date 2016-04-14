@@ -10,15 +10,26 @@ command -v brew >/dev/null 2>&1 || { echo "Installing brew..."; ruby -e "$(curl 
 
 brew tap homebrew/php
 brew tap homebrew/versions
+brew tap homebrew/python
 
 brew update
 brew upgrade
 
 # Install PHP stuff
+# PHP 5.4
+brew install php54
 brew install php54-memcache
 brew install php54-xdebug
+brew install php54-mongo
+
+# PHP 5.5
+brew install php55
+brew install php55-memcache
+brew install php55-memcached
+brew install php55-xdebug
+brew install php55-mongo
+
 brew install phpmyadmin
-brew install libmemcached
 
 # Install Java utils
 brew install gradle
@@ -29,20 +40,23 @@ brew link --force scala210
 # Bash utils
 brew install bash-completion
 
+# Other
+brew install antiword
 brew install git
 brew install imagemagick
-brew install antiword
 brew install kdiff3
+brew install memcached
 brew install mysql
-brew install sqlite
 brew install node
-brew install python
+brew install pngcheck
 brew install poppler
 brew install pwgen
+brew install python
+brew install rbenv
+brew install sqlite
 brew install tesseract
 brew install wget
-brew install zookeeper
 brew install zlib
-brew install pngcheck
+brew install zookeeper
 
 brew cleanup
