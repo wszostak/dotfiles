@@ -71,7 +71,7 @@
 [i18n]
 [user]
 	name = Wojciech Szostak
-	email = wojciech.szostak@allegrogroup.com
+	email = gwszostak@gmail.com
 [filter "lfs"]
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f

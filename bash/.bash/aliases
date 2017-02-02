@@ -6,17 +6,10 @@ alias ll='ls -la'
 alias path='echo $PATH | tr ":" "\n" | sort'
 alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias cls='clr'
-alias scala="JAVA_HOME=`/usr/libexec/java_home -v 1.7` $(brew --prefix scala210)/bin/scala"
-alias genclient="JAVA_HOME=`/usr/libexec/java_home -v 1.7` ./bin/runscala.sh"
 alias idea="open -a 'Intellij IDEA'"
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias googlecc='java -jar /usr/local/lib/node_modules/google-closure-compiler/compiler.jar'
 alias st='sublime'
 alias p='cd ~/projekty'
-alias pnms='cd ~/projekty/NMS/nms'
-alias pom='cd ~/projekty/OM/offer-manager'
-alias pts='cd ~/projekty/TS/template-service'
-alias psec='cd ~/projekty/SEC'
 alias cup='composer update'
 alias cin='composer install'
 alias ..='cd ../'
