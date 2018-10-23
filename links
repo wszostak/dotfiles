@@ -11,6 +11,7 @@
 ~/.vim, /vim/.vim
 
 # Git
+~/opt/git-prompt.sh, /git/git-prompt.sh
 ~/.gitconfig, /git/.gitconfig
 ~/.gitignore_global, /git/.gitignore_global
 ~/.gitk, /git/.gitk

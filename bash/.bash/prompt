@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+source ~/opt/git-prompt.sh
 
 if tput setaf 1 &> /dev/null; then
 	tput sgr0; # reset colors
