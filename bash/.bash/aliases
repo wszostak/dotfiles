@@ -21,6 +21,8 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
+alias puppet-lint='docker run --rm -v "$PWD:/puppet" claranet/puppet-lint'
+
 alias dotfiles='sublime ~/.dotfiles'
 alias hosts='sudo sublime /etc/hosts'
 
