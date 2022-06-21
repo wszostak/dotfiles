@@ -1,10 +1,15 @@
 #! /bin/bash
 
 # dest, src (relative to dotfile dir)
+
 # bash
 ~/.bash, /bash/.bash
 ~/.bash_profile, /bash/.bash_profile
 ~/.bashrc, /bash/.bashrc
+
+# zsh
+~/.zshrc /zsh/.zshrc
+~/.zprofile /zsh/.zprofile
 
 # Vim
 ~/.vimrc, /vim/.vimrc
