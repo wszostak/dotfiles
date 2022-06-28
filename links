@@ -1,0 +1,5 @@
+#! /bin/bash
+
+# dest, src (relative to dotfile dir)
+# bash
+~/.bash_profile, /bash/.bash_profile
