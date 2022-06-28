@@ -2,40 +2,17 @@
 
 set -e
 
-
-DOTFILES_GIT_REPOSITORY="git@github.com:wszostak/dotfiles.git"
-LINKS_FILE="links"
-
 ###############################################################################
 # Configuration
 ###############################################################################
 
+DOTFILES_GIT_REPOSITORY="git@github.com:wszostak/dotfiles.git"
 APT_PACKAGES="curl git imagemagick jq pwgen sqlite tmux vim wget zsh"
 BREW_PACKAGES="git gnupg imagemagick jq pwgen python@3.9 sqlite tmux vim wget"
 
-
 ###############################################################################
-# Detect OS
+# Functions
 ###############################################################################
-
-OS_TYPE="$(uname -s)"
-
-case "${OS_TYPE}" in
-    Linux*)
-        OS_TYPE="Linux"
-        if [ !  -f "/etc/debian_version" ]; then
-           [ -z "${skip_system_packages}" ] && no_system_packages
-        fi
-        ;;
-    Darwin*) 
-        OS_TYPE="macOS"
-        ;;
-    *)
-        OS_TYPE="Other"
-        [ -z "${skip_system_packages}" ] && no_system_packages
-        ;;
-esac
-
 
 function install_brew {
     echo "Installing Homebrew..."
@@ -72,6 +49,28 @@ function create_link {
 }
 
 ###############################################################################
+# Detect OS
+###############################################################################
+
+OS_TYPE="$(uname -s)"
+
+case "${OS_TYPE}" in
+    Linux*)
+        OS_TYPE="Linux"
+        if [ !  -f "/etc/debian_version" ]; then
+           [ -z "${skip_system_packages}" ] && no_system_packages
+        fi
+        ;;
+    Darwin*)
+        OS_TYPE="macOS"
+        ;;
+    *)
+        OS_TYPE="Other"
+        [ -z "${skip_system_packages}" ] && no_system_packages
+        ;;
+esac
+
+###############################################################################
 # Install packages
 ###############################################################################
 
@@ -85,7 +84,7 @@ $(display_packages)
 EOF
 
 while true; do
-  read -rp "Install packages? (y/n) " yn
+  read -rp "Install packages? (y/n/s) " yn
   case "${yn}" in
     [Yy]*)
       if [ "${OS_TYPE}" == "Linux" ]; then
@@ -94,10 +93,17 @@ while true; do
         brew_install_packages
       fi
       break;;
+    [Ss]*) break;;
     [Nn]*) exit 0;;
-    *) echo "Please answer y or n";;
+    *) echo "Please answer y, s or n";;
   esac
 done
+
+###############################################################################
+# Install oh-my-zsh
+###############################################################################
+
+[ ! -d "${HOME}/.oh-my-zsh" ] && git clone https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
 
 ###############################################################################
 # Clone dotfiles
@@ -122,7 +128,6 @@ if [ "${DEBUG}" == "1" ]; then
 else
     git clone "${DOTFILES_GIT_REPOSITORY}" "${CLONE_PATH}"
 fi
-
 
 ###############################################################################
 # Personalize git user
@@ -168,3 +173,8 @@ create_link "${CLONE_PATH}/git/.gitk" "${HOME}/.gitk"
 
 [ "${OS_TYPE}" != "macOS" ] && chsh -s "$(command -v zsh)"
 
+cat << EOF
+Dotfiles was installed successfully!
+EOF
+
+exit 0
