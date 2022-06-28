@@ -5,7 +5,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="${HOME}/.oh-my-zsh"
 
 NVM_LAZY=1
-NVM_AUTOLOAD=1
 
 ZSH_THEME="strug"
 
