@@ -1080,7 +1080,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1352,7 +1352,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1758,7 +1758,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/</string>
+			<string></string>
 		</dict>
 	</array>
 	<key>PointerActions</key>
