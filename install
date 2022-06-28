@@ -66,6 +66,11 @@ function display_packages {
     fi
 }
 
+function create_link {
+    echo "${1}" ⇢ "${2}"
+    ln -fs "${1}" "${2}"
+}
+
 ###############################################################################
 # Install packages
 ###############################################################################
@@ -144,17 +149,17 @@ fi;
 echo "Setting up symlinks:"
 
 # Zsh
-ln -fs "${CLONE_PATH}/zsh/.zshrc" "${HOME}/.zshrc"
-ln -fs "${CLONE_PATH}/zsh/.zprofile" "${HOME}/.zprofile"
+create_link "${CLONE_PATH}/zsh/.zshrc" "${HOME}/.zshrc"
+create_link "${CLONE_PATH}/zsh/.zprofile" "${HOME}/.zprofile"
 
 # Vim
-ln -fs "${CLONE_PATH}/vim/.vimrc" "${HOME}/.vimrc"
-ln -fs "${CLONE_PATH}/vim/.vim" "${HOME}/.vim"
+create_link "${CLONE_PATH}/vim/.vimrc" "${HOME}/.vimrc"
+create_link "${CLONE_PATH}/vim/.vim" "${HOME}/.vim"
 
 # Git
-ln -fs "${CLONE_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
-ln -fs "${CLONE_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
-ln -fs "${CLONE_PATH}/git/.gitk" "${HOME}/.gitk"
+create_link "${CLONE_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
+create_link "${CLONE_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
+create_link "${CLONE_PATH}/git/.gitk" "${HOME}/.gitk"
 
 
 ###############################################################################
