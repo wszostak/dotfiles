@@ -123,20 +123,18 @@ fi
 # Personalize git user
 ###############################################################################
 
-echo "Personalize git user. Can leave empty. You can later edit file ~/.gitconfig.user manualy."
+if [ ! -f "${HOME}/.gitconfig.user" ]; then
+    echo "Personalize git user. Can leave empty. You can later edit file ~/.gitconfig.user manualy."
 
-read -rep $'\nGit user.name: ' GIT_USERNAME
-read -rep $'\nGit user.email: ' GIT_EMAIL
+    read -rep $'\nGit user.name: ' GIT_USERNAME
+    read -rep $'\nGit user.email: ' GIT_EMAIL
 
-cat > "${HOME}/.gitconfig.user" <<EOF
-[user]
-    name = ${GIT_USERNAME}
-    email = ${GIT_EMAIL}
+    cat > "${HOME}/.gitconfig.user" <<EOF
+    [user]
+        name = ${GIT_USERNAME}
+        email = ${GIT_EMAIL}
 EOF
-
-# cp "${clone_path}/.gitconfig.user" "${HOME}/.gitconfig.user"
-
-cd "${CLONE_PATH}"
+fi;
 
 
 ###############################################################################
@@ -145,38 +143,19 @@ cd "${CLONE_PATH}"
 
 echo "Setting up symlinks:"
 
-while read -r LINE; do
-  if [[ ! "${LINE}" == \#* ]] && [ -n "${LINE}" ]; then
-    IFS=","
-    set -- "${LINE}"
+# Zsh
+ln -fs "${CLONE_PATH}/zsh/.zshrc" "${HOME}/.zshrc"
+ln -fs "${CLONE_PATH}/zsh/.zprofile" "${HOME}/.zprofile"
 
-    # DST_FILE - the file to override in ~/
-    DST_FILE=$(echo "${1}" | sed 's/^ *//g' | sed 's/ *$//g')
-    DST_FILE=${DST_FILE/"~"/"$HOME"}
+# Vim
+ln -fs "${CLONE_PATH}/vim/.vimrc" "${HOME}/.vimrc"
+ln -fs "${CLONE_PATH}/vim/.vim" "${HOME}/.vim"
 
-    # SRC_FILE - the source file in the dotfiles repo
-    SRC_FILE=$(echo "${2}" | sed 's/^ *//g' | sed 's/ *$//g')
-    SRC_FILE=${CLONE_PATH}${SRC_FILE}
+# Git
+ln -fs "${CLONE_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
+ln -fs "${CLONE_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
+ln -fs "${CLONE_PATH}/git/.gitk" "${HOME}/.gitk"
 
-    # unlink
-    if [ -L "${DST_FILE}" ]; then
-      unlink "${DST_FILE}"
-    fi
-
-    # delete file
-    if [ -a "${DST_FILE}" ]; then
-      rm -rf "${DST_FILE}"
-    fi
-
-    # create dir
-    mkdir -p -- "$(dirname -- "${DST_FILE}")"
-
-    # create link
-    ln -sfF "${SRC_FILE}" "${DST_FILE}"
-    echo "${SRC_FILE} ⇢ ${DST_FILE}"
-    unset IFS
-  fi
-done < "${LINKS_FILE}"
 
 ###############################################################################
 # Change default shell to zsh
