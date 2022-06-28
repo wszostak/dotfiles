@@ -6,7 +6,7 @@
     # Make `git rebase` safer on OS X
     # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
     trustctime = false
-	ignorecase = false
+    ignorecase = false
 [alias]
     mylog = log --committer=szostak --no-merges --all-match --reverse --pretty='%h %cd %Cblue%s%Creset'
     lol = !git --no-pager log --oneline --graph -25
@@ -28,7 +28,6 @@
     clang = checkout -- lang/
 [help]
     autocorrect = 1
-
 [color]
     ui = auto
 [color "branch"]
@@ -53,10 +52,8 @@
     command = image
 [diff "bin"]
     textconv = hexdump -v -C
-
 [difftool "image"]
     cmd = imagediff.sh $MERGED $LOCAL
-
 [merge]
     tool = kdiff3
 [mergetool]
@@ -69,12 +66,11 @@
 [branch]
     autosetuprebase = always
 [i18n]
-[user]
-    name =
-    email =
 [filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
-	required = true
+    clean = git lfs clean %f
+    smudge = git lfs smudge %f
+    required = true
 [init]
-	defaultBranch = master
+    defaultBranch = master
+[include]
+    path=~/.gitconfig.user

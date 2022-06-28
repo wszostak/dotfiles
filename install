@@ -1,46 +1,186 @@
 #!/bin/bash
-#
-# script will create symlinks for all files in LINKS
 
-LINKS="links"
-DOTFILES=${PWD}
+set -e
 
-# validate script working directory is DOTFILES dir
-if [ ! -f $DOTFILES/install ]; then
-  echo "*** ERROR: Make sure to run script in dotfiles dir! ***"
-  exit
+
+DOTFILES_GIT_REPOSITORY="git@github.com:wszostak/dotfiles.git"
+LINKS_FILE="links"
+
+###############################################################################
+# Configuration
+###############################################################################
+
+APT_PACKAGES="curl git imagemagick jq pwgen sqlite tmux vim wget zsh"
+BREW_PACKAGES="git gnupg imagemagick jq pwgen python@3.9 sqlite tmux vim wget"
+
+
+###############################################################################
+# Detect OS
+###############################################################################
+
+OS_TYPE="$(uname -s)"
+
+case "${OS_TYPE}" in
+    Linux*)
+        OS_TYPE="Linux"
+        if [ !  -f "/etc/debian_version" ]; then
+           [ -z "${skip_system_packages}" ] && no_system_packages
+        fi
+        ;;
+    Darwin*) 
+        OS_TYPE="macOS"
+        ;;
+    *)
+        OS_TYPE="Other"
+        [ -z "${skip_system_packages}" ] && no_system_packages
+        ;;
+esac
+
+
+function install_brew {
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+function brew_install_packages {
+    [ -x "$(command -v brew > /dev/null 2>&1)" ] && install_brew
+
+    echo "Installing Homebrew packages..."
+
+    # shellcheck disable=SC2086
+    brew install ${BREW_PACKAGES}
+}
+
+function apt_install_packages {
+    echo "Installing packages"
+
+    # shellcheck disable=SC2086
+    sudo apt-get update && sudo apt-get install -y ${APT_PACKAGES}
+}
+
+function display_packages {
+    if [ "${OS_TYPE}" == "Linux" ]; then
+        echo "${APT_PACKAGES}"
+    else
+        echo "${BREW_PACKAGES}"
+    fi
+}
+
+###############################################################################
+# Install packages
+###############################################################################
+
+cat << EOF
+Packages installation
+=====================
+
+$(display_packages)
+
+=====================
+EOF
+
+while true; do
+  read -rp "Install packages? (y/n) " yn
+  case "${yn}" in
+    [Yy]*)
+      if [ "${OS_TYPE}" == "Linux" ]; then
+        apt_install_packages
+      else
+        brew_install_packages
+      fi
+      break;;
+    [Nn]*) exit 0;;
+    *) echo "Please answer y or n";;
+  esac
+done
+
+###############################################################################
+# Clone dotfiles
+###############################################################################
+
+read -rep $'\nWhere do you want to clone these dotfiles to [~/.dotfiles]? ' CLONE_PATH
+CLONE_PATH="${CLONE_PATH:-"${HOME}/.dotfiles"}"
+
+# Ensure path doesn't exist.
+while [ -e "${CLONE_PATH}" ]; do
+    read -rep $'\nPath exists, try again? (y) ' y
+    case "${y}" in
+        [Yy]*)
+
+            break;;
+        *) echo "Please answer y or CTRL+c the script to abort everything";;
+    esac
+done
+
+if [ "${DEBUG}" == "1" ]; then
+    cp -R "${PWD}/." "${CLONE_PATH}"
+else
+    git clone "${DOTFILES_GIT_REPOSITORY}" "${CLONE_PATH}"
 fi
+
+
+###############################################################################
+# Personalize git user
+###############################################################################
+
+echo "Personalize git user. Can leave empty. You can later edit file ~/.gitconfig.user manualy."
+
+read -rep $'\nGit user.name: ' GIT_USERNAME
+read -rep $'\nGit user.email: ' GIT_EMAIL
+
+cat > "${HOME}/.gitconfig.user" <<EOF
+[user]
+    name = ${GIT_USERNAME}
+    email = ${GIT_EMAIL}
+EOF
+
+# cp "${clone_path}/.gitconfig.user" "${HOME}/.gitconfig.user"
+
+cd "${CLONE_PATH}"
+
+
+###############################################################################
+# create symlinks for all files in LINKS
+###############################################################################
 
 echo "Setting up symlinks:"
 
-while read line; do
-  if [[ ! $line == \#* ]] && [ -n "$line" ]; then
+while read -r LINE; do
+  if [[ ! "${LINE}" == \#* ]] && [ -n "${LINE}" ]; then
     IFS=","
-    set -- $line
+    set -- "${LINE}"
 
-    # dest - the file to override in ~/
-    # src - the source file in the dotfiles repo
-    dest=$(echo $1 | sed 's/^ *//g' | sed 's/ *$//g')
-    dest=${dest/"~"/$HOME}
-    src=$(echo $2 | sed 's/^ *//g' | sed 's/ *$//g')
-    src=$DOTFILES$src
+    # DST_FILE - the file to override in ~/
+    DST_FILE=$(echo "${1}" | sed 's/^ *//g' | sed 's/ *$//g')
+    DST_FILE=${DST_FILE/"~"/"$HOME"}
+
+    # SRC_FILE - the source file in the dotfiles repo
+    SRC_FILE=$(echo "${2}" | sed 's/^ *//g' | sed 's/ *$//g')
+    SRC_FILE=${CLONE_PATH}${SRC_FILE}
 
     # unlink
-    if [ -L $dest ]; then
-      unlink $dest
+    if [ -L "${DST_FILE}" ]; then
+      unlink "${DST_FILE}"
     fi
 
     # delete file
-    if [ -a $dest ]; then
-      rm -rf $dest
+    if [ -a "${DST_FILE}" ]; then
+      rm -rf "${DST_FILE}"
     fi
 
     # create dir
-    mkdir -p -- "$(dirname -- "$dest")"
+    mkdir -p -- "$(dirname -- "${DST_FILE}")"
 
     # create link
-    ln -sfF $src $dest
-    echo "$src -> $dest"
+    ln -sfF "${SRC_FILE}" "${DST_FILE}"
+    echo "${SRC_FILE} ⇢ ${DST_FILE}"
     unset IFS
   fi
-done < $LINKS
+done < "${LINKS_FILE}"
+
+###############################################################################
+# Change default shell to zsh
+###############################################################################
+
+[ "${OS_TYPE}" != "macOS" ] && chsh -s "$(command -v zsh)"
+

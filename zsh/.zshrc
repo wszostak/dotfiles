@@ -7,11 +7,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 NVM_LAZY=1
 NVM_AUTOLOAD=1
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="strug"
-ZSH_THEME_GIT_SHOW_UPSTREAM=
-ZSH_THEME_GIT_PROMPT_REMOTE_STATUS_DETAILED=
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -91,6 +87,12 @@ export LANG=en_US.UTF-8
 alias idea="open -a 'Intellij IDEA CE'"
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias st='sublime'
+alias puppet-lint='docker run --rm -v "$PWD:/puppet" claranet/puppet-lint'
+alias path='echo $PATH | tr ":" "\n" | sort'
+
+alias show="defaults write com.apple.finder AppleShowAllFiles TRUE && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles FALSE && killall Finder"
+
 
 PATH="$(python3 -m site --user-base)/bin${PATH:+:${PATH}}"; export PATH;
 
