@@ -2,21 +2,15 @@
 
 # dest, src (relative to dotfile dir)
 
-# bash
-~/.bash, /bash/.bash
-~/.bash_profile, /bash/.bash_profile
-~/.bashrc, /bash/.bashrc
-
 # zsh
-~/.zshrc /zsh/.zshrc
-~/.zprofile /zsh/.zprofile
+~/.zshrc, /zsh/.zshrc
+~/.zprofile, /zsh/.zprofile
 
 # Vim
 ~/.vimrc, /vim/.vimrc
 ~/.vim, /vim/.vim
 
 # Git
-~/opt/git-prompt.sh, /git/git-prompt.sh
 ~/.gitconfig, /git/.gitconfig
 ~/.gitignore_global, /git/.gitignore_global
 ~/.gitk, /git/.gitk
