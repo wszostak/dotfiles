@@ -1,0 +1,4 @@
+#!/usr/bin/env /bin/zsh
+
+# Change mapping for numerical keyboard "." -> ","
+hidutil property --set '{"UserKeyMapping": [{"HIDKeyboardModifierMappingSrc": 0x700000063, "HIDKeyboardModifierMappingDst": 0x700000036}]}'
