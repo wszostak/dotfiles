@@ -1,4 +1,5 @@
 #!/usr/bin/env /bin/zsh
 
+# https://developer.apple.com/library/archive/technotes/tn2450/_index.html
 # Change mapping for numerical keyboard "." -> ","
 hidutil property --set '{"UserKeyMapping": [{"HIDKeyboardModifierMappingSrc": 0x700000063, "HIDKeyboardModifierMappingDst": 0x700000036}]}'

@@ -1,8 +1,6 @@
 [core]
     excludesfile = ~/.gitignore_global
-
     precomposeunicode = true
-
     # Make `git rebase` safer on OS X
     # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
     trustctime = false
@@ -43,9 +41,9 @@
     added = green
     changed = yellow
     untracked = red
-
 [diff]
     renames = copies
+    tool = opendiff
 [diff "pdf"]
     textconv = "pdftohtml -stdout -noframes "
 [diff "image"]
@@ -55,7 +53,7 @@
 [difftool "image"]
     cmd = imagediff.sh $MERGED $LOCAL
 [merge]
-    tool = kdiff3
+    tool = opendiff
 [mergetool]
     keepBackup = false
     prompt = false
@@ -74,3 +72,5 @@
     defaultBranch = master
 [include]
     path=~/.gitconfig.user
+[pager]
+    branch = false
